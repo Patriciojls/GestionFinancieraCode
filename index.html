@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<a href="login.html">Iniciar Sesión</a>
+
+
+<head>
+  <meta charset="utf-8">
+  <title>Gestión Financiera Integral — GFI-UTCH-2026-V1</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="description" content="Plataforma web de gestión financiera...">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- Bootstrap 4 -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="css/styleGFI.css">
+
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <div class="container-fluid px-0 d-flex align-items-center justify-content-between flex-wrap">
+        <a href="#hero" class="py-3" style="outline:none; display:flex; align-items:center; padding: 4px 0;">
+        <img src="img/letraslogo.png" alt="GFI Logo letras" style="height: 85px;">
+      <img src="img/logoraton.png" alt="GFI Logo" style="height: 80px; max-height: 80px;">
+</a>  
+</a>
+      <button class="navbar-toggler d-lg-none" onclick="toggleMenu()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navmenu" class="d-none d-lg-flex align-items-center">
+        <a href="#hero"       class="nav-link-custom active">Inicio</a>
+        <a href="#nosotros"   class="nav-link-custom">Nosotros</a>
+        <a href="#modulos"    class="nav-link-custom">Módulos</a>
+        <a href="#precios"    class="nav-link-custom">Precios</a>
+        <a href="#equipo"     class="nav-link-custom">Equipo</a>
+        <a href="#contacto"   class="nav-link-custom nav-cta ml-3">Contacto</a>
+        <a href="login.html" class="nav-link-custom nav-cta ml-3">Iniciar Sesión</a>
+      </div>
+      <!-- Mobile menu -->
+      <div id="navmenu-mobile" class="d-none w-100 pb-2">
+        <a href="#hero"       class="nav-link-custom d-block" onclick="closeMenu()">Inicio</a>
+        <a href="#nosotros"   class="nav-link-custom d-block" onclick="closeMenu()">Nosotros</a>
+        <a href="#modulos"    class="nav-link-custom d-block" onclick="closeMenu()">Módulos</a>
+        <a href="#precios"    class="nav-link-custom d-block" onclick="closeMenu()">Precios</a>
+        <a href="#equipo"     class="nav-link-custom d-block" onclick="closeMenu()">Equipo</a>
+        <a href="login.html" class="nav-link-custom nav-cta ml-3" onclick="closeMenu()">Iniciar Sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 hero-content">
+          <h1 class="hero-title">
+            El puente entre<br>
+            <span>el negocio</span> y la<br>
+            vida personal
+          </h1>
+          <p class="hero-subtitle">
+            Plataforma web de gestión financiera para emprendedores, profesionistas independientes y dueños de micronegocios en México. Toma decisiones informadas, elimina la incertidumbre financiera.
+          </p>
+          <a href="#modulos" class="btn-primary-custom">Conocer Módulos</a>
+          <a href="#precios" class="btn-outline-custom">Ver Planes</a>
+
+          
+        </div>
+
+        <div class="col-lg-5 d-none d-lg-block pl-5">
+          <div class="hero-image-card">
+            <!-- Placeholder visual cuando no hay imagen -->
+            <div style="height:480px;background:linear-gradient(135deg,#1f1a0e,#2a2010,#1a1a1a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;">
+              <div style="width:90px;height:90px;background:rgba(244,168,32,.12);border:2px solid rgba(244,168,32,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-chart-line" style="font-size:2.4rem;color:var(--primary);"></i>
+              </div>
+              <p style="color:#555;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;">Dashboard financiero</p>
+            </div>
+            <div class="hero-card-overlay">
+              <span class="hero-card-tag">Gestión Financiera</span>
+              <p style="color:#ccc;font-size:.85rem;margin-top:8px;margin-bottom:0;">Control total de tus finanzas personales y de negocio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NOSOTROS ===== -->
+  <section id="nosotros">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="about-img-wrapper pr-lg-4">
+            <!-- Placeholder imagen -->
+            <div style="width:100%;height:400px;background:linear-gradient(135deg,#f0ede4,#e8e0d0);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+              <i class="fas fa-laptop-code" style="font-size:4rem;color:rgba(244,168,32,.5);"></i>
+              <span style="font-size:.8rem;color:#aaa;letter-spacing:1px;text-transform:uppercase;">Imagen del equipo</span>
+            </div>
+            <div class="about-accent-box">
+              <span class="about-accent-num">5</span>
+              <span class="about-accent-text">integrantes<br>del equipo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 fade-up">
+          <div class="section-badge">Quiénes Somos</div>
+          <h2 class="section-title">Plataforma financiera diseñada para el emprendedor mexicano</h2>
+          <p class="section-subtitle mb-4">
+            GFI nace en la Universidad Tecnológica de Chetumal para erradicar la incertidumbre financiera. Sabemos que tener dinero sin saber en qué se usó es el primer paso hacia el cierre de un negocio.
+          </p>
+
+          <div class="about-feature">
+            <div class="about-feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <div>
+              <div class="about-feature-title">Seguridad de tus datos</div>
+              <div class="about-feature-desc">Acceso protegido con usuario y contraseña cifrada. Tu información financiera es exclusivamente tuya.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div>
+              <div class="about-feature-title">Acceso desde cualquier dispositivo</div>
+              <div class="about-feature-desc">Diseño 100% responsive. Revisa tu negocio desde la computadora, tablet o celular.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><i class="fas fa-calculator"></i></div>
+            <div>
+              <div class="about-feature-title">Cálculos automáticos y precisos</div>
+              <div class="about-feature-desc">Sin fórmulas manuales en Excel. El sistema calcula utilidades, gastos y tiempos de liquidación en tiempo real.</div>
+            </div>
+          </div>
+
+          <a href="#modulos" class="btn-primary-custom mt-2">Ver Módulos</a>
+        </div>
+      </div>
+
+      <!-- Tarjetas de contacto -->
+      <div class="row mt-2">
+        <div class="col-md-4 mb-3">
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <div class="contact-info-label">Nuestras Oficinas</div>
+              <div class="contact-info-value">Chetumal, Quintana Roo</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="contact-info-label">Correo Electrónico</div>
+              <div class="contact-info-value">info@gfi.com.mx</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <div class="contact-info-label">Número Telefónico</div>
+              <div class="contact-info-value">+52 983 XXX XXXX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MÓDULOS ===== -->
+  <section id="modulos">
+    <div class="container">
+      <div class="text-center mb-5 fade-up">
+        <div class="section-badge">Qué Hacemos</div>
+        <h2 class="section-title">Nuestros Módulos</h2>
+        <p class="section-subtitle mx-auto">Tres herramientas integradas para que tengas claridad total sobre tu dinero, tu negocio y tus metas.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4 mb-4 fade-up">
+          <div class="modulo-card">
+            <div class="modulo-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="modulo-title">Administración de Negocio</div>
+            <p class="modulo-desc">Registra tus ventas, costos y gastos operativos. Obtén el cálculo automático de tus utilidades reales sin necesidad de conocimientos contables.</p>
+            <ul class="modulo-features">
+              <li>Registro de ventas e ingresos</li>
+              <li>Control de costos y gastos</li>
+              <li>Cálculo automático de utilidades</li>
+              <li>Reportes de rentabilidad</li>
+            </ul>
+            <a href="#precios" class="modulo-link">Conocer más <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4 fade-up">
+          <div class="modulo-card">
+            <div class="modulo-icon"><i class="fas fa-wallet"></i></div>
+            <div class="modulo-title">Finanzas Personales</div>
+            <p class="modulo-desc">Lleva un historial claro de tus ingresos y gastos personales. Separa tu vida financiera personal de la del negocio para tener una visión completa.</p>
+            <ul class="modulo-features">
+              <li>Registro de ingresos personales</li>
+              <li>Control de gastos del hogar</li>
+              <li>Balance personal mensual</li>
+              <li>Metas de ahorro personales</li>
+            </ul>
+            <a href="#precios" class="modulo-link">Conocer más <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4 fade-up">
+          <div class="modulo-card">
+            <div class="modulo-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="modulo-title">Proyección de Deudas</div>
+            <p class="modulo-desc">Calcula exactamente cuántos meses necesitas para liquidar tus deudas y cumplir tus metas financieras. Planifica con datos reales, no estimaciones.</p>
+            <ul class="modulo-features">
+              <li>Conteo de meses para liquidar deudas</li>
+              <li>Panel de metas y objetivos</li>
+              <li>Proyección financiera a futuro</li>
+              <li>Alertas y recordatorios</li>
+            </ul>
+            <a href="#precios" class="modulo-link">Conocer más <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PORQUÉ ELEGIRNOS ===== -->
+  <section id="porque">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5 mb-5 mb-lg-0 fade-up">
+          <div class="section-badge" style="color:var(--dark);">Por Qué Elegirnos</div>
+          <h2 class="section-title" style="color:#fff;">Claridad financiera para el emprendedor moderno</h2>
+          <p style="color:#888;font-size:.92rem;line-height:1.7;margin-bottom:36px;">
+            A diferencia de Excel o libretas, GFI es una herramienta predictiva diseñada específicamente para la realidad del micro-emprendedor mexicano que opera bajo la figura de Persona Física.
+          </p>
+
+          <div class="porque-feature">
+            <div class="porque-feature-icon"><i class="fas fa-cloud"></i></div>
+            <div>
+              <div class="porque-feature-title">100% en la Nube</div>
+              <div class="porque-feature-desc">Accede desde cualquier lugar sin instalar nada. Tu información siempre disponible y respaldada.</div>
+            </div>
+          </div>
+          <div class="porque-feature">
+            <div class="porque-feature-icon"><i class="fas fa-lock"></i></div>
+            <div>
+              <div class="porque-feature-title">Datos Aislados y Seguros</div>
+              <div class="porque-feature-desc">Ningún tercero puede ver tu información financiera. Control de acceso robusto con cifrado.</div>
+            </div>
+          </div>
+          <div class="porque-feature">
+            <div class="porque-feature-icon"><i class="fas fa-user-check"></i></div>
+            <div>
+              <div class="porque-feature-title">Sin Conocimientos Contables</div>
+              <div class="porque-feature-desc">Interfaz diseñada para emprendedores, no para contadores. Simple, claro y directo.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-1 fade-up">
+          <div class="row">
+            <div class="col-6 mb-4">
+              <div class="porque-stat-card">
+                <span class="porque-num">3</span>
+                <div class="porque-label">Módulos<br>integrados</div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="porque-stat-card">
+                <span class="porque-num">5</span>
+                <div class="porque-label">Integrantes<br>del equipo</div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="porque-stat-card">
+                <span class="porque-num">4-5</span>
+                <div class="porque-label">Meses de<br>desarrollo</div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="porque-stat-card">
+                <span class="porque-num">Oct</span>
+                <div class="porque-label">Lanzamiento<br>2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRECIOS ===== -->
+  <section id="precios">
+    <div class="container">
+      <div class="text-center mb-5 fade-up">
+        <div class="section-badge">Membresías</div>
+        <h2 class="section-title">Planes y Precios</h2>
+        <p class="section-subtitle mx-auto">Elige el plan que mejor se adapte a las necesidades de tu negocio. Todos incluyen acceso web y diseño responsive.</p>
+      </div>
+
+      <div class="row align-items-stretch justify-content-center">
+        <div class="col-lg-4 col-md-6 mb-4 fade-up">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <div class="pricing-name">Básico</div>
+              <div class="pricing-amount">$XXX</div>
+              <div class="pricing-period">/ mes</div>
+            </div>
+            <div class="pricing-body">
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Módulo de Administración de Negocio</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Módulo de Finanzas Personales</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Acceso desde cualquier navegador</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Diseño responsive (móvil y escritorio)</div>
+              <div class="pricing-feature" style="color:#ccc;"><i class="fas fa-times" style="color:#ddd;"></i>&nbsp; Proyección de Deudas</div>
+              <div class="pricing-feature" style="color:#ccc;"><i class="fas fa-times" style="color:#ddd;"></i>&nbsp; Soporte prioritario</div>
+              <a href="#contacto" class="pricing-cta">Comenzar Ahora</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4 fade-up">
+          <div class="pricing-card" style="border-color:var(--primary);transform:scale(1.03);">
+            <div style="background:var(--primary);text-align:center;padding:6px;font-size:.72rem;font-weight:800;color:var(--dark);letter-spacing:1px;text-transform:uppercase;">⭐ Más popular</div>
+            <div class="pricing-header dark">
+              <div class="pricing-name">Premium</div>
+              <div class="pricing-amount">$XXX</div>
+              <div class="pricing-period">/ mes</div>
+            </div>
+            <div class="pricing-body">
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Módulo de Administración de Negocio</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Módulo de Finanzas Personales</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Proyección de Deudas y Metas</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Acceso desde cualquier navegador</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Diseño responsive (móvil y escritorio)</div>
+              <div class="pricing-feature"><i class="fas fa-check check"></i> Soporte prioritario por equipo</div>
+              <a href="#contacto" class="pricing-cta dark-cta">Comenzar Ahora</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mb-4 fade-up">
+          <div class="pricing-custom">
+            <div class="pricing-custom-icon"><i class="fas fa-headset"></i></div>
+            <div class="section-badge" style="margin-bottom:16px;">Plan Personalizado</div>
+            <h3 style="font-size:1.3rem;font-weight:800;color:#1a1a1a;margin-bottom:12px;">¿Necesitas algo específico?</h3>
+            <p style="font-size:.875rem;color:#777;line-height:1.65;margin-bottom:28px;">Contáctanos y diseñamos un plan a la medida de tu negocio. Nuestro equipo estará listo para atenderte.</p>
+            <a href="#contacto" class="btn-primary-custom">Contactar Ahora</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EQUIPO ===== -->
+  <section id="equipo">
+    <div class="container">
+      <div class="text-center mb-5 fade-up">
+        <div class="section-badge">Nuestro Equipo</div>
+        <h2 class="section-title">Las personas detrás de GFI</h2>
+        <p class="section-subtitle mx-auto">Estudiantes de Ingeniería en TICs de la Universidad Tecnológica de Chetumal, desarrollando soluciones reales para emprendedores mexicanos.</p>
+      </div>
+
+      <!-- Director -->
+      <div class="director-card mb-5 fade-up">
+        <div class="director-avatar">E</div>
+        <div>
+          <div class="director-name">Eliezer Samuel Castillo Ruiz</div>
+          <div class="director-role">Director del Proyecto</div>
+          <div class="director-desc">Responsable de las decisiones técnicas, gestión del personal, resolución de conflictos y gestión de cambios del proyecto GFI-UTCH-2026-V1.</div>
+        </div>
+      </div>
+
+      <!-- Integrantes -->
+      <div class="row">
+        <div class="col-lg col-md-4 col-6 mb-4 fade-up">
+          <div class="team-card">
+            <div class="team-avatar">P</div>
+            <div class="team-info">
+              <div class="team-name">Patricio Joel<br>Santoyo De La Cruz</div>
+              <div class="team-role">Desarrollador</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg col-md-4 col-6 mb-4 fade-up">
+          <div class="team-card">
+            <div class="team-avatar">A</div>
+            <div class="team-info">
+              <div class="team-name">Aldrick Salomón<br>Godoy De La Portilla</div>
+              <div class="team-role">Desarrollador</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg col-md-4 col-6 mb-4 fade-up">
+          <div class="team-card">
+            <div class="team-avatar">AM</div>
+            <div class="team-info">
+              <div class="team-name">Ana María<br>Quiroga Calderón</div>
+              <div class="team-role">Desarrolladora</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg col-md-4 col-6 mb-4 fade-up">
+          <div class="team-card">
+            <div class="team-avatar">V</div>
+            <div class="team-info">
+              <div class="team-name">Valentín Antonio<br>Cruz Ureña</div>
+              <div class="team-role">Desarrollador</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg col-md-4 col-6 mb-4 fade-up">
+          <div class="team-card">
+            <div class="team-avatar">AZ</div>
+            <div class="team-info">
+              <div class="team-name">Azriel Alexis<br>Díaz Zapata</div>
+              <div class="team-role">Desarrollador</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evaluador -->
+      <div class="row justify-content-center mt-2">
+        <div class="col-lg-6">
+          <div style="background:#fff;border:1px solid #ececec;border-radius:10px;padding:28px;display:flex;align-items:center;gap:20px;">
+            <div style="width:56px;height:56px;background:rgba(244,168,32,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;color:var(--primary);flex-shrink:0;">F</div>
+            <div>
+              <div style="font-size:.7rem;color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Docente Evaluador</div>
+              <div style="font-size:1rem;font-weight:800;color:#1a1a1a;">Dr. Fernando Trejo Uco</div>
+              <div style="font-size:.82rem;color:#888;margin-top:4px;">Materia de Proyecto Integrador — Carrera de TICs, UTCH</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIOS ===== -->
+  <section id="testimonios">
+    <div class="container">
+      <div class="text-center mb-5 fade-up">
+        <div class="section-badge">Testimonios</div>
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <p class="section-subtitle mx-auto">Emprendedores y dueños de micronegocios que han confiado en GFI para tomar el control de sus finanzas.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-4 fade-up">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Antes no sabía si mi negocio era rentable. Con GFI puedo ver mis utilidades reales en segundos. Es exactamente lo que necesitaba como persona física."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MR</div>
+              <div>
+                <div class="testimonial-name">María R.</div>
+                <div class="testimonial-job">Dueña de tienda, Chetumal</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 fade-up">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Lo que más me gustó es que no necesito saber contabilidad. La plataforma hace los cálculos sola y me dice cuándo voy a terminar de pagar mis deudas."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">JL</div>
+              <div>
+                <div class="testimonial-name">José L.</div>
+                <div class="testimonial-job">Profesionista independiente, QROO</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 fade-up">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Por fin puedo ver mis finanzas personales separadas de las del negocio. Ahora sé exactamente cuánto gana mi empresa y cuánto tengo yo disponible."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">AC</div>
+              <div>
+                <div class="testimonial-name">Ana C.</div>
+                <div class="testimonial-job">Microempresaria, Bacalar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO / CTA ===== -->
+  <section id="contacto">
+    <div class="container">
+      <div class="cta-wrapper">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="cta-title">¿Listo para tomar el control<br>de tus finanzas?</h2>
+            <p class="cta-sub">Únete a GFI y empieza a tomar decisiones financieras informadas desde hoy.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <i class="fas fa-check-circle" style="color:var(--dark);font-size:1.1rem;"></i>
+                <span style="font-size:.85rem;color:rgba(26,26,26,.75);font-weight:600;">Sin conocimientos contables</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <i class="fas fa-check-circle" style="color:var(--dark);font-size:1.1rem;"></i>
+                <span style="font-size:.85rem;color:rgba(26,26,26,.75);font-weight:600;">100% en la nube</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <i class="fas fa-check-circle" style="color:var(--dark);font-size:1.1rem;"></i>
+                <span style="font-size:.85rem;color:rgba(26,26,26,.75);font-weight:600;">Datos seguros y privados</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <input type="text"     class="contact-form-input" placeholder="Tu nombre completo">
+            <input type="email"    class="contact-form-input" placeholder="Correo electrónico">
+            <input type="tel"      class="contact-form-input" placeholder="Teléfono (opcional)">
+            <textarea              class="contact-form-input" rows="3" placeholder="Mensaje o consulta" style="resize:vertical;"></textarea>
+            <button class="btn-submit">Enviar Mensaje &nbsp;<i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-5">
+          <div class="footer-logo"><span>G</span>FI<span>.</span></div>
+          <p class="footer-desc">Gestión Financiera Integral — El puente entre el negocio y la vida personal. Plataforma desarrollada en la Universidad Tecnológica de Chetumal.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 mb-5">
+          <div class="footer-heading">Navegación</div>
+          <a href="#hero"       class="footer-link"><i class="fas fa-angle-right"></i> Inicio</a>
+          <a href="#nosotros"   class="footer-link"><i class="fas fa-angle-right"></i> Nosotros</a>
+          <a href="#modulos"    class="footer-link"><i class="fas fa-angle-right"></i> Módulos</a>
+          <a href="#precios"    class="footer-link"><i class="fas fa-angle-right"></i> Precios</a>
+          <a href="#equipo"     class="footer-link"><i class="fas fa-angle-right"></i> Equipo</a>
+          <a href="#contacto"   class="footer-link"><i class="fas fa-angle-right"></i> Contacto</a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mb-5">
+          <div class="footer-heading">Módulos</div>
+          <a href="#modulos" class="footer-link"><i class="fas fa-angle-right"></i> Adm. de Negocio</a>
+          <a href="#modulos" class="footer-link"><i class="fas fa-angle-right"></i> Finanzas Personales</a>
+          <a href="#modulos" class="footer-link"><i class="fas fa-angle-right"></i> Proyección de Deudas</a>
+          <a href="#precios" class="footer-link"><i class="fas fa-angle-right"></i> Plan Básico</a>
+          <a href="#precios" class="footer-link"><i class="fas fa-angle-right"></i> Plan Premium</a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mb-5">
+          <div class="footer-heading">Contacto</div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="footer-contact-text">Universidad Tecnológica de Chetumal<br>Chetumal, Quintana Roo, México</div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div class="footer-contact-text">info@gfi.com.mx</div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div class="footer-contact-text">+52 983 XXX XXXX</div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-tag"></i>
+            <div class="footer-contact-text">GFI-UTCH-2026-V1 · Versión 1.1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 <span>Gestión Financiera Integral</span> — Universidad Tecnológica de Chetumal &nbsp;·&nbsp; Director: Eliezer Samuel Castillo Ruiz &nbsp;·&nbsp; Evaluador: Dr. Fernando Trejo Uco</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-angle-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Navbar scroll
+    window.addEventListener('scroll', function() {
+      const nav = document.getElementById('navbar');
+      const btn = document.getElementById('back-to-top');
+      if (window.scrollY > 60) {
+        nav.classList.add('scrolled');
+        btn.classList.add('visible');
+      } else {
+        nav.classList.remove('scrolled');
+        btn.classList.remove('visible');
+      }
+
+      // Active nav link
+      const sections = ['hero','nosotros','modulos','porque','precios','equipo','testimonios','contacto'];
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 100) current = id;
+      });
+      document.querySelectorAll('.nav-link-custom').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      const m = document.getElementById('navmenu-mobile');
+      m.classList.toggle('d-none');
+    }
+    function closeMenu() {
+      document.getElementById('navmenu-mobile').classList.add('d-none');
+    }
+
+    // Fade-up on scroll
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
