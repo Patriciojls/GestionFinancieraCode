@@ -1,3 +1,0 @@
-//prompts pendientes de proyecto 
-
-como puedo vincular esta pagina a un servidor de github, recuerdo haberlo hecho y funciono, podia compartirlo como link y funcionara. Otra cosa, tambien puedo ir actualizando para que con lo que yo le agregue se vaya 
