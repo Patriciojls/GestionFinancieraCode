@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<a href="login.html">Iniciar Sesión</a>
+<a href="../views/login.html">Iniciar Sesión</a>
 
 <!-- 
 Codigo para guardar cambios en git:
@@ -25,8 +25,11 @@ git push
   <!-- Bootstrap 4 -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <!-- Tu CSS -->
-  <link rel="stylesheet" href="css/styleGFI.css">
+  <link rel="stylesheet" href="../css/styleGFI.css">
 
 </head>
 <body>
@@ -35,7 +38,7 @@ git push
   <nav id="navbar">
     <div class="container-fluid px-0 d-flex align-items-center justify-content-between flex-wrap">
         <a href="#hero" class="py-3" style="outline:none; display:flex; align-items:center; padding: 4px 0;">
-        <img src="img/logocompleto.png" alt="GFI Logo letras" style="height: 85px;">
+        <img src="../img/logocompleto.png" alt="GFI Logo letras" style="height: 85px;">
 </a>  
 </a>
       <button class="navbar-toggler d-lg-none" onclick="toggleMenu()">
@@ -48,7 +51,7 @@ git push
         <a href="#precios"    class="nav-link-custom">Precios</a>
         <a href="#equipo"     class="nav-link-custom">Equipo</a>
         <a href="#contacto"   class="nav-link-custom nav-cta ml-3">Contacto</a>
-        <a href="login.html" class="nav-link-custom nav-cta ml-3">Iniciar Sesión</a>
+        <a href="../views/login.html" class="nav-link-custom nav-cta ml-3">Iniciar Sesión</a>
       </div>
       <!-- Mobile menu -->
       <div id="navmenu-mobile" class="d-none w-100 pb-2">
@@ -57,7 +60,7 @@ git push
         <a href="#modulos"    class="nav-link-custom d-block" onclick="closeMenu()">Módulos</a>
         <a href="#precios"    class="nav-link-custom d-block" onclick="closeMenu()">Precios</a>
         <a href="#equipo"     class="nav-link-custom d-block" onclick="closeMenu()">Equipo</a>
-        <a href="login.html" class="nav-link-custom nav-cta ml-3" onclick="closeMenu()">Iniciar Sesión</a>
+        <a href="../views/login.html" class="nav-link-custom nav-cta ml-3" onclick="closeMenu()">Iniciar Sesión</a>
       </div>
     </div>
   </nav>
@@ -84,17 +87,80 @@ git push
         </div>
 
         <div class="col-lg-5 d-none d-lg-block pl-5">
-          <div class="hero-image-card">
-            <!-- Placeholder visual cuando no hay imagen -->
-            <div style="height:480px;background:linear-gradient(135deg,#1f1a0e,#2a2010,#1a1a1a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;">
-              <div style="width:90px;height:90px;background:rgba(244,168,32,.12);border:2px solid rgba(244,168,32,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;">
-                <i class="fas fa-chart-line" style="font-size:2.4rem;color:var(--primary);"></i>
-              </div>
-              <p style="color:#555;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;">Dashboard financiero</p>
-            </div>
-            <div class="hero-card-overlay">
-              <span class="hero-card-tag">Gestión Financiera</span>
-              <p style="color:#ccc;font-size:.85rem;margin-top:8px;margin-bottom:0;">Control total de tus finanzas personales y de negocio</p>
+             
+ <div class="dashboard-card">
+ 
+  <!-- Header de la card -->
+  <div class="dc-header">
+    <div class="dc-header-left">
+      <div class="dc-dot green"></div>
+      <div class="dc-dot yellow"></div>
+      <div class="dc-dot red"></div>
+    </div>
+    <span class="dc-title">Panel Financiero</span>
+    <span class="dc-live"><span class="dc-live-dot"></span> En vivo</span>
+  </div>
+ 
+  <!-- Contadores arriba -->
+  <div class="dc-stats">
+    <div class="dc-stat">
+      <span class="dc-stat-label">Ingresos</span>
+      <span class="dc-stat-num green-text" data-target="124500">$0</span>
+      <span class="dc-stat-change up">▲ 12.4%</span>
+    </div>
+    <div class="dc-stat">
+      <span class="dc-stat-label">Gastos</span>
+      <span class="dc-stat-num red-text" data-target="38200">$0</span>
+      <span class="dc-stat-change down">▼ 3.1%</span>
+    </div>
+    <div class="dc-stat">
+      <span class="dc-stat-label">Utilidad</span>
+      <span class="dc-stat-num orange-text" data-target="86300">$0</span>
+      <span class="dc-stat-change up">▲ 8.7%</span>
+    </div>
+  </div>
+ 
+  <!-- Gráfica -->
+  <div class="dc-chart-wrapper">
+    <canvas id="heroChart"></canvas>
+  </div>
+ 
+  <!-- Barras de progreso -->
+  <div class="dc-bars">
+    <div class="dc-bar-item">
+      <div class="dc-bar-info">
+        <span class="dc-bar-label">Administración negocio</span>
+        <span class="dc-bar-pct">78%</span>
+      </div>
+      <div class="dc-bar-track">
+        <div class="dc-bar-fill orange" data-width="78"></div>
+      </div>
+    </div>
+    <div class="dc-bar-item">
+      <div class="dc-bar-info">
+        <span class="dc-bar-label">Finanzas personales</span>
+        <span class="dc-bar-pct">62%</span>
+      </div>
+      <div class="dc-bar-track">
+        <div class="dc-bar-fill green" data-width="62"></div>
+      </div>
+    </div>
+    <div class="dc-bar-item">
+      <div class="dc-bar-info">
+        <span class="dc-bar-label">Proyección de deudas</span>
+        <span class="dc-bar-pct">45%</span>
+      </div>
+      <div class="dc-bar-track">
+        <div class="dc-bar-fill blue" data-width="45"></div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Footer -->
+  <div class="dc-footer">
+    <span class="dc-badge">GESTIÓN FINANCIERA</span>
+    <span class="dc-footer-text">Control total de tus finanzas</span>
+             </div>
             </div>
           </div>
         </div>
@@ -610,6 +676,7 @@ git push
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="../controller/js/dashboardScript.js"></script>
 
   <script>
     // Navbar scroll
