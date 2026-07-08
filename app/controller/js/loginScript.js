@@ -18,12 +18,14 @@ function handleLogin() {
   const alert = document.getElementById('loginAlert');
   const msg   = document.getElementById('loginAlertMsg');
 
+/*
   // Resetear alerta
   alert.classList.remove('show');
   alert.style.background   = 'rgba(220,53,69,.08)';
   alert.style.borderColor  = 'rgba(220,53,69,.25)';
   alert.style.color        = '#c0392b';
   alert.querySelector('i').className = 'fas fa-exclamation-circle';
+*/
 
   // Validaciones
   if (!email || !pass) {
