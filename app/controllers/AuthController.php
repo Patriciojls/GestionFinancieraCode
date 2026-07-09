@@ -51,5 +51,10 @@ switch ($accion) {
 
     default:
         echo json_encode(['exito' => false, 'mensaje' => 'Acción no válida']);
+
+        case 'logout':
+    session_destroy();
+    echo json_encode(['exito' => true]);
+    break;
 }
 ?>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Iniciar Sesión — GFI</title>
+  <title>Crear Cuenta — GFI</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Google Fonts -->
@@ -31,14 +31,9 @@
       <div class="login-left-glow2"></div>
 
       <div class="login-left-content">
-        <!-- Logo -->
         <div class="login-logo">
           <img src="../img/logoraton.png" alt="GFI Logo">
-          <!-- Si no tienes logo como imagen, usa este texto: -->
-          <!-- <div class="login-logo-text"><span>G</span>FI<span>.</span></div> -->
         </div>
-
-        <!-- <div class="project-badge"> <i class="fas fa-circle" style="font-size:.4rem;"></i> GFI-UTCH-2026-V1 </div> -->
 
         <h2 class="login-tagline">
           El puente entre<br>
@@ -46,7 +41,7 @@
           vida personal
         </h2>
         <p class="login-desc">
-          Accede a tu plataforma de gestión financiera. Controla tus ingresos, gastos y proyecciones desde un solo lugar.
+          Únete a GFI y empieza a controlar tus finanzas personales y de negocio desde hoy.
         </p>
 
         <div class="login-features">
@@ -70,18 +65,30 @@
     <div class="login-right">
       <div class="login-form-wrapper">
 
-        <!-- Móvil: logo pequeño -->
         <div class="d-block d-md-none text-center mb-4">
-          <img src="img/logogfisinfondo.png" alt="GFI" style="height:50px;filter:brightness(10);">
+          <img src="../img/logogfisinfondo.png" alt="GFI" style="height:50px;filter:brightness(10);">
         </div>
 
-        <h2 class="login-form-title">Bienvenido de nuevo</h2>
-        <p class="login-form-subtitle">Ingresa tus credenciales para acceder a tu cuenta</p>
+        <h2 class="login-form-title">Crea tu cuenta</h2>
+        <p class="login-form-subtitle">Regístrate para empezar a usar GFI</p>
 
-        <!-- Alerta error -->
-        <div class="login-alert" id="loginAlert">
+        <!-- Alerta -->
+        <div class="login-alert" id="registroAlert">
           <i class="fas fa-exclamation-circle"></i>
-          <span id="loginAlertMsg">Correo o contraseña incorrectos.</span>
+          <span id="registroAlertMsg">Error</span>
+        </div>
+
+        <!-- Campo nombre -->
+        <label class="form-label-custom">Nombre completo</label>
+        <div class="input-icon-wrapper">
+          <i class="fas fa-user input-icon"></i>
+          <input
+            type="text"
+            class="form-input-custom"
+            id="inputNombre"
+            placeholder="Tu nombre completo"
+            autocomplete="name"
+          >
         </div>
 
         <!-- Campo correo -->
@@ -105,8 +112,8 @@
             type="password"
             class="form-input-custom"
             id="inputPass"
-            placeholder="••••••••"
-            autocomplete="current-password"
+            placeholder="Mínimo 8 caracteres"
+            autocomplete="new-password"
             style="padding-right: 44px;"
           >
           <button class="input-toggle-pass" onclick="togglePass()" id="togglePassBtn" type="button">
@@ -114,18 +121,22 @@
           </button>
         </div>
 
-        <!-- Recordar / Olvidé -->
-        <div class="form-options">
-          <label class="form-check-label-custom">
-            <input type="checkbox" class="form-check-input-custom" id="rememberMe">
-            Recordarme
-          </label>
-          <a href="#" class="form-forgot">¿Olvidaste tu contraseña?</a>
+        <!-- Campo confirmar contraseña -->
+        <label class="form-label-custom">Confirmar contraseña</label>
+        <div class="input-icon-wrapper">
+          <i class="fas fa-lock input-icon"></i>
+          <input
+            type="password"
+            class="form-input-custom"
+            id="inputPassConfirm"
+            placeholder="Repite tu contraseña"
+            autocomplete="new-password"
+          >
         </div>
 
-        <!-- Botón login -->
-        <button class="btn-login" onclick="handleLogin()" href="#">
-          <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
+        <!-- Botón registro -->
+        <button class="btn-login" onclick="handleRegistro()">
+          <i class="fas fa-user-plus mr-2"></i> Crear cuenta
         </button>
 
         <div class="login-divider">
@@ -134,13 +145,13 @@
           <div class="login-divider-line"></div>
         </div>
 
-        <!-- Botón registro -->
-        <a href="registro.html" class="btn-register">
-          <i class="fas fa-user-plus mr-2"></i> Crear una cuenta nueva
+        <!-- Volver a login -->
+        <a href="login.html" class="btn-register">
+          <i class="fas fa-sign-in-alt mr-2"></i> Ya tengo una cuenta
         </a>
 
         <div class="login-footer-note">
-          Al iniciar sesión aceptas nuestros
+          Al registrarte aceptas nuestros
           <a href="#">Términos de uso</a> y
           <a href="#">Política de privacidad</a>.<br><br>
           <span style="color:#aaa;">Universidad Tecnológica de Chetumal</span><br>
@@ -153,9 +164,5 @@
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../controllers/js/loginScript.js"></script>
-
-</body>
+<script src="../controllers/js/registroScript.js"></script></body>
 </html>
