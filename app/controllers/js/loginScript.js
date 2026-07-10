@@ -39,7 +39,7 @@ function handleLogin() {
     .then(res => res.json())
     .then(data => {
         if (data.exito) {
-            mostrarExito('✓ Bienvenido ' + data.nombre + '. Redirigiendo...');
+            mostrarExito('Bienvenido ' + data.nombre + '. Redirigiendo...');
             setTimeout(() => {
                 window.location.href = 'dashboard.php';
             }, 1500);

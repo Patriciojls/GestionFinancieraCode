@@ -5,7 +5,8 @@ class Usuario {
     private $db;
 
     public function __construct() {
-        $this->db = ConexionBD::getInstancia()->getConexion();
+        $conexionBD = new ConexionBD();
+        $this->db = $conexionBD->getConexion();
     }
 
     public function registrar($nombre, $correo, $password) {

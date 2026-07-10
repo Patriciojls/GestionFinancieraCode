@@ -51,7 +51,7 @@ fetch('../controllers/AuthController.php', {
   .then(res => res.json())
   .then(data => {
     if (data.exito) {
-      mostrarExito('✓ Cuenta creada correctamente. Redirigiendo al login...');
+      mostrarExito('Cuenta creada correctamente. Redirigiendo al login...');
       setTimeout(() => {
         window.location.href = 'login.html';
       }, 1500);
