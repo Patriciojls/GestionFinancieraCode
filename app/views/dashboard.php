@@ -36,17 +36,21 @@ if (!isset($_SESSION['id_usuario'])) {
 
     <!-- Navegación a secciones -->
     <div class="dashboard-nav" style="display:flex; gap:1rem; flex-wrap:wrap;">
-      <a href="ingresos.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
+
+      <a href="demo-cruds/aldrickcrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
         <i class="fas fa-wallet mr-2"></i> Ingresos
       </a>
       <a href="gastos.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
         <i class="fas fa-shopping-cart mr-2"></i> Gastos
       </a>
-      <a href="deudas.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
+      <a href="demo-cruds/azrielcrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
         <i class="fas fa-file-invoice-dollar mr-2"></i> Deudas
       </a>
-      <a href="metas.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
+      <a href="demo-cruds/anitacrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
         <i class="fas fa-bullseye mr-2"></i> Metas
+      </a>
+      <a href="demo-cruds/patriciocrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
+        <i class="fas fa-quote-right mr-2"></i> Testimonios
       </a>
     </div>
 

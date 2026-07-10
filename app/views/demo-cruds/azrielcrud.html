@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deudas — GFI</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      padding: 2rem;
+    }
+    h2 { margin-top: 0; }
+    p.subtitle { color: #999; margin-top: -.5rem; }
+
+    a.volver {
+      color: #F4A820;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    a.volver:hover { text-decoration: underline; }
+
+    .layout {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    /* ===== FORMULARIO ===== */
+    .form-panel {
+      flex: 1;
+      min-width: 280px;
+      max-width: 350px;
+    }
+
+    label {
+      display: block;
+      font-size: .8rem;
+      color: #aaa;
+      margin: 1rem 0 .3rem;
+      text-transform: uppercase;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: .6rem .8rem;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: .9rem;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #F4A820;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: .7rem 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .btn-guardar {
+      background: #F4A820;
+      color: #111;
+      width: 100%;
+      margin-top: 1.3rem;
+    }
+
+    .btn-cancelar {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid #333;
+      width: 100%;
+      margin-top: .6rem;
+    }
+
+    /* ===== TABS ===== */
+    .tabs {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #aaa;
+      padding: .7rem 1.2rem;
+      font-size: .9rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn.active {
+      color: #F4A820;
+      border-bottom: 2px solid #F4A820;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ===== LISTA ===== */
+    .lista-panel { flex: 2; min-width: 320px; }
+
+    .deuda-item {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .deuda-info h4 { margin: 0 0 .3rem; }
+    .deuda-info p { margin: .3rem 0; color: #ccc; font-size: .9rem; }
+    .deuda-info small { color: #666; }
+
+    .monto-deuda {
+      color: #F4A820;
+      font-weight: bold;
+      font-size: 1.05rem;
+    }
+
+    .estado-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .25rem .7rem;
+      border-radius: 20px;
+      font-size: .75rem;
+      font-weight: bold;
+      background: rgba(244, 168, 32, .1);
+      color: #F4A820;
+    }
+
+    .estado-badge.liquidada {
+      background: rgba(74, 222, 128, .1);
+      color: #4ade80;
+    }
+
+    .deuda-acciones { display: flex; gap: .5rem; flex-shrink: 0; }
+
+    .btn-icono {
+      background: transparent;
+      border: 1px solid #333;
+      color: #ccc;
+      border-radius: 6px;
+      padding: .4rem .6rem;
+      cursor: pointer;
+    }
+    .btn-icono:hover { border-color: #F4A820; color: #F4A820; }
+    .btn-icono.eliminar:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    .aviso-simulacion {
+      background: rgba(244, 168, 32, .08);
+      border: 1px solid rgba(244, 168, 32, .25);
+      color: #F4A820;
+      border-radius: 8px;
+      padding: .8rem 1rem;
+      font-size: .85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== MODAL ELIMINAR ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal-overlay.show { display: flex; }
+
+    .modal-box {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      max-width: 380px;
+      width: 90%;
+    }
+    .modal-box h4 { margin-top: 0; color: #e74c3c; }
+    .modal-box p { color: #ccc; font-size: .9rem; }
+    .modal-acciones {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+    .modal-acciones .btn { flex: 1; margin: 0; }
+    .btn-eliminar-confirm {
+      background: #e74c3c;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../dashboard.php" class="volver"><i class="fas fa-arrow-left"></i> Volver al dashboard</a>
+
+  <h2 style="margin-top:1rem;"><i class="fas fa-file-invoice-dollar"></i> Deudas</h2>
+  <p class="subtitle">Administra tus deudas y registra tus abonos</p>
+
+  <div class="aviso-simulacion">
+    <i class="fas fa-info-circle"></i> Vista de simulación: por el momento estos datos son de ejemplo y no se guardan de forma permanente.
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="crear">Registrar</button>
+    <button class="tab-btn" data-tab="leer">Mis Deudas</button>
+    <button class="tab-btn" data-tab="pago">Registrar Pago</button>
+  </div>
+
+  <!-- ===== CREATE ===== -->
+  <div class="tab-content active" id="tab-crear">
+    <div class="card form-panel">
+      <h3>Nueva deuda</h3>
+      <form id="formCrear">
+        <label>Nombre de la deuda</label>
+        <input type="text" id="c_nombre" required>
+
+        <label>Monto total</label>
+        <input type="number" step="0.01" id="c_monto" required>
+
+        <label>Tasa de interés anual (%)</label>
+        <input type="number" step="0.01" id="c_tasa" required>
+
+        <label>Pago mensual</label>
+        <input type="number" step="0.01" id="c_pago" required>
+
+        <button type="submit" class="btn btn-guardar">
+          <i class="fas fa-save"></i> Guardar deuda
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== READ ===== -->
+  <div class="tab-content" id="tab-leer">
+    <div class="lista-panel" id="listaDeudas"></div>
+  </div>
+
+  <!-- ===== UPDATE (pago) ===== -->
+  <div class="tab-content" id="tab-pago">
+    <div class="card form-panel">
+      <h3>Registrar pago</h3>
+      <form id="formPago">
+        <label>Deuda</label>
+        <select id="u_deuda"></select>
+
+        <label>Monto del abono</label>
+        <input type="number" step="0.01" id="u_abono" required>
+
+        <button type="submit" class="btn btn-guardar">
+          <i class="fas fa-hand-holding-usd"></i> Registrar pago
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL ELIMINAR ===== -->
+  <div class="modal-overlay" id="modalEliminar">
+    <div class="modal-box">
+      <h4><i class="fas fa-exclamation-triangle"></i> Confirmar eliminación</h4>
+      <p>¿Estás seguro de que deseas eliminar <strong id="modalNombre"></strong>?</p>
+      <div class="modal-acciones">
+        <button class="btn btn-cancelar" id="btnCancelarEliminar">Cancelar</button>
+        <button class="btn btn-eliminar-confirm" id="btnConfirmar">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let deudas = [
+    {id:1, nombre:"Tarjeta BBVA", monto:18500, tasa:32.5, pago:1200},
+    {id:2, nombre:"Crédito auto", monto:145000, tasa:11.2, pago:4300},
+  ];
+  let nextId = 3, idEliminar = null;
+
+  // ----- Tabs -----
+  document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("tab-"+btn.dataset.tab).classList.add("active");
+    });
+  });
+
+  function irATab(nombre){
+    document.querySelector(`.tab-btn[data-tab="${nombre}"]`).click();
+  }
+
+  function calcularMeses(monto, tasa, pago){
+    const r = (tasa/100)/12;
+    if(monto<=0) return "liquidada";
+    if(pago<=0 || pago<=monto*r) return null;
+    if(r===0) return Math.ceil(monto/pago);
+    return Math.ceil(-Math.log(1-(r*monto)/pago)/Math.log(1+r));
+  }
+
+  function render(){
+    const lista = document.getElementById("listaDeudas");
+    lista.innerHTML = "";
+    deudas.forEach(d=>{
+      const meses = calcularMeses(d.monto, d.tasa, d.pago);
+      const liquidada = meses === "liquidada";
+      const estadoTexto = liquidada ? "Liquidada" : (meses===null ? "Sin liquidar" : meses+" meses restantes");
+
+      lista.innerHTML += `
+        <div class="deuda-item">
+          <div class="deuda-info">
+            <h4><span class="monto-deuda">$${d.monto.toFixed(2)}</span></h4>
+            <div class="estado-badge ${liquidada ? 'liquidada' : ''}">
+              <i class="fas fa-${liquidada ? 'check-circle' : 'clock'}"></i> ${estadoTexto}
+            </div>
+            <p>${d.nombre} — Tasa: ${d.tasa}% anual · Pago mensual: $${d.pago.toFixed(2)}</p>
+            <small>ID: ${d.id}</small>
+          </div>
+          <div class="deuda-acciones">
+            <button class="btn-icono" onclick="editar(${d.id})" title="Registrar pago"><i class="fas fa-pen"></i></button>
+            <button class="btn-icono eliminar" onclick="pedirEliminar(${d.id})" title="Eliminar"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>`;
+    });
+
+    const sel = document.getElementById("u_deuda");
+    sel.innerHTML = deudas.map(d=>`<option value="${d.id}">${d.nombre}</option>`).join("");
+  }
+
+  document.getElementById("formCrear").addEventListener("submit", e=>{
+    e.preventDefault();
+    deudas.push({
+      id: nextId++,
+      nombre: document.getElementById("c_nombre").value,
+      monto: parseFloat(document.getElementById("c_monto").value),
+      tasa: parseFloat(document.getElementById("c_tasa").value),
+      pago: parseFloat(document.getElementById("c_pago").value),
+    });
+    render();
+    e.target.reset();
+    irATab("leer");
+  });
+
+  document.getElementById("formPago").addEventListener("submit", e=>{
+    e.preventDefault();
+    const d = deudas.find(x=>x.id==document.getElementById("u_deuda").value);
+    const abono = parseFloat(document.getElementById("u_abono").value);
+    d.monto = Math.max(0, d.monto - abono);
+    render();
+    e.target.reset();
+    alert("Pago registrado. Nuevo saldo: $" + d.monto.toFixed(2));
+  });
+
+  function editar(id){
+    irATab("pago");
+    document.getElementById("u_deuda").value = id;
+  }
+
+  function pedirEliminar(id){
+    idEliminar = id;
+    document.getElementById("modalNombre").textContent = deudas.find(d=>d.id==id).nombre;
+    document.getElementById("modalEliminar").classList.add("show");
+  }
+
+  document.getElementById("btnCancelarEliminar").addEventListener("click", ()=>{
+    document.getElementById("modalEliminar").classList.remove("show");
+  });
+
+  document.getElementById("btnConfirmar").addEventListener("click", ()=>{
+    deudas = deudas.filter(d=>d.id!==idEliminar);
+    render();
+    document.getElementById("modalEliminar").classList.remove("show");
+  });
+
+  render();
+</script>
+</body>
+</html>

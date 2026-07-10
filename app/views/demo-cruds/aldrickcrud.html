@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingresos — GFI</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      padding: 2rem;
+    }
+    h2 { margin-top: 0; }
+    p.subtitle { color: #999; margin-top: -.5rem; }
+
+    a.volver {
+      color: #F4A820;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    a.volver:hover { text-decoration: underline; }
+
+    .layout {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    /* ===== FORMULARIO ===== */
+    .form-panel {
+      flex: 1;
+      min-width: 280px;
+      max-width: 350px;
+    }
+
+    label {
+      display: block;
+      font-size: .8rem;
+      color: #aaa;
+      margin: 1rem 0 .3rem;
+      text-transform: uppercase;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: .6rem .8rem;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: .9rem;
+    }
+
+    textarea { resize: vertical; min-height: 70px; }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #F4A820;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: .7rem 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .btn-guardar {
+      background: #F4A820;
+      color: #111;
+      width: 100%;
+      margin-top: 1.3rem;
+    }
+
+    .btn-cancelar {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid #333;
+      width: 100%;
+      margin-top: .6rem;
+    }
+
+    /* ===== LISTA ===== */
+    .lista-panel { flex: 2; min-width: 320px; }
+
+    .resumen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .resumen-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+
+    .resumen-label {
+      color: #999;
+      font-size: .75rem;
+      text-transform: uppercase;
+      margin: 0 0 .4rem;
+    }
+
+    .resumen-valor {
+      color: #F4A820;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .ingreso-item {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .ingreso-info h4 { margin: 0 0 .3rem; }
+    .ingreso-info p { margin: .3rem 0; color: #ccc; font-size: .9rem; }
+    .ingreso-info small { color: #666; }
+
+    .categoria-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .25rem .7rem;
+      border-radius: 20px;
+      font-size: .75rem;
+      font-weight: bold;
+      background: rgba(244, 168, 32, .1);
+      color: #F4A820;
+    }
+
+    .monto-ingreso {
+      color: #F4A820;
+      font-weight: bold;
+      font-size: 1.05rem;
+    }
+
+    .ingreso-acciones { display: flex; gap: .5rem; flex-shrink: 0; }
+
+    .btn-icono {
+      background: transparent;
+      border: 1px solid #333;
+      color: #ccc;
+      border-radius: 6px;
+      padding: .4rem .6rem;
+      cursor: pointer;
+    }
+    .btn-icono:hover { border-color: #F4A820; color: #F4A820; }
+    .btn-icono.eliminar:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    .aviso-simulacion {
+      background: rgba(244, 168, 32, .08);
+      border: 1px solid rgba(244, 168, 32, .25);
+      color: #F4A820;
+      border-radius: 8px;
+      padding: .8rem 1rem;
+      font-size: .85rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../dashboard.php" class="volver"><i class="fas fa-arrow-left"></i> Volver al dashboard</a>
+
+  <h2 style="margin-top:1rem;"><i class="fas fa-arrow-down"></i> Ingresos</h2>
+  <p class="subtitle">Administra y visualiza todo el dinero que entra a tus cuentas</p>
+
+  <div class="aviso-simulacion">
+    <i class="fas fa-info-circle"></i> Vista de simulación: por el momento estos datos son de ejemplo y no se guardan de forma permanente.
+  </div>
+
+  <div class="resumen-grid">
+    <div class="resumen-card">
+      <p class="resumen-label">Ingresos del mes</p>
+      <p class="resumen-valor">$22,200.00</p>
+    </div>
+    <div class="resumen-card">
+      <p class="resumen-label">Promedio por ingreso</p>
+      <p class="resumen-valor">$7,400.00</p>
+    </div>
+    <div class="resumen-card">
+      <p class="resumen-label">Total acumulado (año)</p>
+      <p class="resumen-valor">$145,800.00</p>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- ===== FORMULARIO (Create / Update simulados) ===== -->
+    <div class="card form-panel">
+      <h3>Nuevo ingreso</h3>
+
+      <form onsubmit="event.preventDefault(); alert('✓ Simulación: ingreso guardado con éxito.');">
+        <label>Fecha</label>
+        <input type="date" value="2026-07-10" required>
+
+        <label>Monto ($)</label>
+        <input type="number" placeholder="0.00" min="0" step="0.01" required>
+
+        <label>Categoría / Fuente</label>
+        <select required>
+          <option value="">Selecciona una fuente...</option>
+          <option value="salario">Salario / Nómina</option>
+          <option value="freelance">Freelance / Servicios</option>
+          <option value="ventas">Ventas de productos</option>
+          <option value="inversiones">Rendimientos / Inversiones</option>
+          <option value="otros">Otros ingresos</option>
+        </select>
+
+        <label>Descripción</label>
+        <input type="text" placeholder="Ej: Pago quincenal, Venta de...">
+
+        <button type="submit" class="btn btn-guardar">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+      </form>
+    </div>
+
+    <!-- ===== LISTA (Read / Delete simulados) ===== -->
+    <div class="lista-panel">
+
+      <div class="ingreso-item">
+        <div class="ingreso-info">
+          <h4><span class="monto-ingreso">+$12,500.00</span></h4>
+          <div class="categoria-badge"><i class="fas fa-briefcase"></i> Salario</div>
+          <p>Pago quincenal - Empresa ABC</p>
+          <small>08/07/2026</small>
+        </div>
+        <div class="ingreso-acciones">
+          <button class="btn-icono" onclick="alert('✓ Simulación: aquí se abriría el formulario para editar este ingreso.');">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="btn-icono eliminar" onclick="if(confirm('¿Seguro que deseas eliminar este ingreso?')) alert('✓ Simulación: ingreso eliminado.');">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ingreso-item">
+        <div class="ingreso-info">
+          <h4><span class="monto-ingreso">+$8,500.00</span></h4>
+          <div class="categoria-badge"><i class="fas fa-laptop-code"></i> Freelance</div>
+          <p>Proyecto de diseño web - Cliente X</p>
+          <small>05/07/2026</small>
+        </div>
+        <div class="ingreso-acciones">
+          <button class="btn-icono" onclick="alert('✓ Simulación: aquí se abriría el formulario para editar este ingreso.');">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="btn-icono eliminar" onclick="if(confirm('¿Seguro que deseas eliminar este ingreso?')) alert('✓ Simulación: ingreso eliminado.');">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ingreso-item">
+        <div class="ingreso-info">
+          <h4><span class="monto-ingreso">+$1,200.00</span></h4>
+          <div class="categoria-badge"><i class="fas fa-shopping-cart"></i> Ventas</div>
+          <p>Venta de producto digital (E-book)</p>
+          <small>02/07/2026</small>
+        </div>
+        <div class="ingreso-acciones">
+          <button class="btn-icono" onclick="alert('✓ Simulación: aquí se abriría el formulario para editar este ingreso.');">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="btn-icono eliminar" onclick="if(confirm('¿Seguro que deseas eliminar este ingreso?')) alert('✓ Simulación: ingreso eliminado.');">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonios — GFI</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      padding: 2rem;
+    }
+    h2 { margin-top: 0; }
+    p.subtitle { color: #999; margin-top: -.5rem; }
+
+    a.volver {
+      color: #F4A820;
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    a.volver:hover { text-decoration: underline; }
+
+    .layout {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    /* ===== FORMULARIO ===== */
+    .form-panel {
+      flex: 1;
+      min-width: 280px;
+      max-width: 350px;
+    }
+
+    label {
+      display: block;
+      font-size: .8rem;
+      color: #aaa;
+      margin: 1rem 0 .3rem;
+      text-transform: uppercase;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: .6rem .8rem;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: .9rem;
+    }
+
+    textarea { resize: vertical; min-height: 70px; }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #F4A820;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: .7rem 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .btn-guardar {
+      background: #F4A820;
+      color: #111;
+      width: 100%;
+      margin-top: 1.3rem;
+    }
+
+    .btn-cancelar {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid #333;
+      width: 100%;
+      margin-top: .6rem;
+    }
+
+    /* ===== LISTA ===== */
+    .lista-panel { flex: 2; min-width: 320px; }
+
+    .testimonio-item {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .testimonio-info h4 { margin: 0 0 .3rem; }
+    .testimonio-info p { margin: .3rem 0; color: #ccc; font-size: .9rem; }
+    .testimonio-info small { color: #666; }
+    .estrellas { color: #F4A820; font-size: .9rem; }
+
+    .testimonio-acciones { display: flex; gap: .5rem; flex-shrink: 0; }
+
+    .btn-icono {
+      background: transparent;
+      border: 1px solid #333;
+      color: #ccc;
+      border-radius: 6px;
+      padding: .4rem .6rem;
+      cursor: pointer;
+    }
+    .btn-icono:hover { border-color: #F4A820; color: #F4A820; }
+    .btn-icono.eliminar:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    .aviso-simulacion {
+      background: rgba(244, 168, 32, .08);
+      border: 1px solid rgba(244, 168, 32, .25);
+      color: #F4A820;
+      border-radius: 8px;
+      padding: .8rem 1rem;
+      font-size: .85rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../dashboard.php" class="volver"><i class="fas fa-arrow-left"></i> Volver al dashboard</a>
+
+  <h2 style="margin-top:1rem;"><i class="fas fa-quote-right"></i> Testimonios</h2>
+  <p class="subtitle">Administra los testimonios de los usuarios</p>
+
+  <div class="aviso-simulacion">
+    <i class="fas fa-info-circle"></i> Vista de simulación: por el momento estos datos son de ejemplo y no se guardan de forma permanente.
+  </div>
+
+  <div class="layout">
+
+    <!-- ===== FORMULARIO (Create / Update simulados) ===== -->
+    <div class="card form-panel">
+      <h3>Nuevo testimonio</h3>
+
+      <form onsubmit="event.preventDefault(); alert('✓ Simulación: testimonio guardado con éxito.');">
+        <label>Nombre</label>
+        <input type="text" placeholder="Nombre de la persona" required>
+
+        <label>Testimonio</label>
+        <textarea placeholder="Escribe el testimonio..." required></textarea>
+
+        <label>Calificación</label>
+        <select>
+          <option value="5">5 estrellas</option>
+          <option value="4">4 estrellas</option>
+          <option value="3">3 estrellas</option>
+          <option value="2">2 estrellas</option>
+          <option value="1">1 estrella</option>
+        </select>
+
+        <button type="submit" class="btn btn-guardar">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+      </form>
+    </div>
+
+    <!-- ===== LISTA (Read / Delete simulados) ===== -->
+    <div class="lista-panel">
+
+      <div class="testimonio-item">
+        <div class="testimonio-info">
+          <h4>María López</h4>
+          <div class="estrellas">★★★★★</div>
+          <p>GFI me ayudó a organizar mis finanzas en muy poco tiempo.</p>
+          <small>10/06/2026</small>
+        </div>
+        <div class="testimonio-acciones">
+          <button class="btn-icono" onclick="alert('✓ Simulación: aquí se abriría el formulario para editar este testimonio.');">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="btn-icono eliminar" onclick="if(confirm('¿Seguro que deseas eliminar este testimonio?')) alert('✓ Simulación: testimonio eliminado.');">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="testimonio-item">
+        <div class="testimonio-info">
+          <h4>Carlos Pérez</h4>
+          <div class="estrellas">★★★★☆</div>
+          <p>Muy fácil de usar, la interfaz es clara y sencilla.</p>
+          <small>02/06/2026</small>
+        </div>
+        <div class="testimonio-acciones">
+          <button class="btn-icono" onclick="alert('✓ Simulación: aquí se abriría el formulario para editar este testimonio.');">
+            <i class="fas fa-pen"></i>
+          </button>
+          <button class="btn-icono eliminar" onclick="if(confirm('¿Seguro que deseas eliminar este testimonio?')) alert('✓ Simulación: testimonio eliminado.');">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
