@@ -29,9 +29,16 @@ if (!isset($_SESSION['id_usuario'])) {
         <h2>Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?></h2>
         <p style="color:#888;">Tu plataforma de gestión financiera</p>
       </div>
-      <button class="btn-login" style="width:auto; padding:.6rem 1.5rem;" onclick="handleLogout()">
+
+
+      <form method="POST" action="../controllers/AuthController.php" style="display: inline;">
+    <input type="hidden" name="accion" value="logout">
+    <button type="submit" class="btn-login" style="width:auto; padding:.6rem 1.5rem;">
         <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
-      </button>
+
+        
+    </button>
+</form>
     </div>
 
     <!-- Navegación a secciones -->

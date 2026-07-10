@@ -1,60 +1,101 @@
 <?php
-require_once '../models/Usuario.php';
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
+require_once __DIR__ . '/../models/Usuario.php';
 
-session_start();
+class AuthController
+{
+    private Usuario $usuarioModel;
 
-$modelo  = new Usuario();
-$accion  = $_POST['accion'] ?? '';
+    public function __construct()
+    {
+        // Iniciamos sesión si no está activa para poder mover los mensajes entre páginas
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-switch ($accion) {
+        $this->usuarioModel = new Usuario();
+    }
 
-    case 'login':
+    /**
+     * Punto de entrada: lee "accion" del POST y despacha
+     * al método correspondiente de la clase.
+     */
+    public function manejarPeticion(): void
+    {
+        $accion = $_POST['accion'] ?? '';
+
+        match ($accion) {
+            'login'    => $this->login(),
+            'registro' => $this->registro(),
+            'logout'   => $this->logout(),
+            default    => $this->redirigir('../views/login.php', 'error', 'Acción no válida'),
+        };
+    }
+
+    private function login(): void
+    {
         $correo   = $_POST['correo']   ?? '';
         $password = $_POST['password'] ?? '';
 
         if (empty($correo) || empty($password)) {
-            echo json_encode(['exito' => false, 'mensaje' => 'Completa todos los campos']);
-            exit;
+            $this->redirigir('../views/login.php', 'error', 'Completa todos los campos');
+            return;
         }
 
-        $usuario = $modelo->verificarLogin($correo, $password);
+        $usuario = $this->usuarioModel->verificarLogin($correo, $password);
 
         if ($usuario) {
             $_SESSION['id_usuario'] = $usuario['id_usuario'];
             $_SESSION['nombre']     = $usuario['nombre'];
-            echo json_encode(['exito' => true, 'nombre' => $usuario['nombre']]);
+            
+            // Redirección directa al Dashboard al tener éxito
+            header("Location: ../views/dashboard.php");
+            exit;
         } else {
-            echo json_encode(['exito' => false, 'mensaje' => 'Correo o contraseña incorrectos']);
+            $this->redirigir('../views/login.php', 'error', 'Correo o contraseña incorrectos');
         }
-        break;
+    }
 
-    case 'registro':
+    private function registro(): void
+    {
         $nombre   = $_POST['nombre']   ?? '';
         $correo   = $_POST['correo']   ?? '';
         $password = $_POST['password'] ?? '';
 
         if (empty($nombre) || empty($correo) || empty($password)) {
-            echo json_encode(['exito' => false, 'mensaje' => 'Completa todos los campos']);
-            exit;
+            $this->redirigir('../views/registro.php', 'error', 'Completa todos los campos');
+            return;
         }
 
         try {
-            $id = $modelo->registrar($nombre, $correo, $password);
-            echo json_encode(['exito' => true, 'id' => $id]);
+            $id = $this->usuarioModel->registrar($nombre, $correo, $password);
+            
+            // Si se registra bien, mandamos el mensaje de éxito hacia el login
+            $this->redirigir('../views/login.php', 'exito', 'Cuenta creada correctamente. ¡Inicia sesión!');
         } catch (Exception $e) {
-            echo json_encode(['exito' => false, 'mensaje' => 'El correo ya está registrado']);
+            $this->redirigir('../views/registro.php', 'error', 'El correo ya está registrado');
         }
-        break;
+    }
 
-    default:
-        echo json_encode(['exito' => false, 'mensaje' => 'Acción no válida']);
+    private function logout(): void
+    {
+        session_destroy();
+        header("Location: ../views/login.php");
+        exit;
+    }
 
-        case 'logout':
-    session_destroy();
-    echo json_encode(['exito' => true]);
-    break;
+    /**
+     * Reemplaza al viejo método "responder". 
+     * Guarda el mensaje en la sesión y redirige a la vista correspondiente.
+     */
+    private function redirigir(string $url, string $tipo, string $mensaje): void
+    {
+        $_SESSION['status_tipo']    = $tipo;
+        $_SESSION['status_mensaje'] = $mensaje;
+        header("Location: " . $url);
+        exit;
+    }
 }
-?>
+
+// ===== Ejecución =====
+$controller = new AuthController();
+$controller->manejarPeticion();
