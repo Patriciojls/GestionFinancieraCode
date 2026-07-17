@@ -50,7 +50,7 @@ if (!isset($_SESSION['id_usuario'])) {
       <a href="demo-cruds/aldrickcrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
         <i class="fas fa-wallet mr-2"></i> Ingresos
       </a>
-      <a href="gastos.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
+      <a href="demo-cruds/egresoscrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">
         <i class="fas fa-shopping-cart mr-2"></i> Egresos
       </a>
       <a href="demo-cruds/azrielcrud.html" class="btn-register" style="width:auto; padding:.8rem 1.5rem;">

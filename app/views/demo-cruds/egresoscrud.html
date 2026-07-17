@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Egresos — GFI</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styleGFI.css">
+
+  <style>
+    /* Estilos específicos para la página de Egresos */
+    .egresos-wrapper {
+      padding: 2rem;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    }
+
+    .egresos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .egresos-title {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .egresos-subtitle {
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-nuevo-egreso {
+      background: #ff4444; /* Rojo para egresos */
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-nuevo-egreso:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 68, 68, 0.3);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Tarjetas de Resumen */
+    .resumen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .resumen-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .resumen-card:hover {
+      transform: translateY(-4px);
+      border-color: #ff4444;
+    }
+
+    .resumen-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 68, 68, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #ff4444;
+      margin-bottom: 1rem;
+    }
+
+    .resumen-label {
+      color: #888;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .resumen-valor {
+      color: #ff4444;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0.2rem 0 0 0;
+    }
+
+    /* Tabla de Egresos */
+    .tabla-egresos {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tabla-header {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tabla-titulo {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .table {
+      margin: 0;
+      color: #fff;
+    }
+
+    .table thead th {
+      background: rgba(255, 255, 255, 0.02);
+      color: #888;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+    }
+
+    .table tbody td {
+      padding: 1.2rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+    }
+
+    .table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .categoria-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(255, 68, 68, 0.1);
+      color: #ff4444;
+    }
+
+    .monto-egreso {
+      color: #ff4444;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .acciones-cell {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-action:hover { background: rgba(255, 255, 255, 0.1); }
+    .btn-action.edit:hover { color: #f4a820; border-color: #f4a820; }
+    .btn-action.delete:hover { color: #ff4444; border-color: #ff4444; }
+
+    /* Modales */
+    .modal-content {
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+    }
+    .modal-header { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; }
+    .modal-title { color: #fff; font-weight: 700; }
+    .modal-body { padding: 1.5rem; }
+    .modal-footer { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 1.5rem; }
+    .close { color: #fff; opacity: 0.8; }
+    .close:hover { color: #ff4444; opacity: 1; }
+
+    .form-label-custom { color: #fff; font-weight: 600; margin-bottom: 0.5rem; display: block; }
+    .form-input-custom, .form-select-custom {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    .form-input-custom:focus, .form-select-custom:focus {
+      outline: none;
+      border-color: #ff4444;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .form-select-custom option { background: #1a1a1a; color: #fff; }
+
+    .btn-submit-red {
+      background: #ff4444; color: #fff; border: none;
+      padding: 0.8rem 2rem; border-radius: 8px; font-weight: 700;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .btn-submit-red:hover { background: #ff0000; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 68, 68, 0.3); }
+
+    .btn-cancel {
+      background: rgba(255, 255, 255, 0.05); color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.8rem 2rem; border-radius: 8px; font-weight: 600;
+      cursor: pointer; transition: all 0.3s; text-decoration: none;
+    }
+    .btn-cancel:hover { background: rgba(255, 255, 255, 0.1); color: #fff; text-decoration: none; }
+
+    .btn-delete-confirm {
+      background: #ff4444; color: #fff; border: none;
+      padding: 0.8rem 2rem; border-radius: 8px; font-weight: 700;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .btn-delete-confirm:hover { background: #ff0000; }
+  </style>
+</head>
+
+<body>
+  <div class="egresos-wrapper">
+
+    <!-- Header -->
+    <div class="egresos-header">
+      <div>
+        <h2 class="egresos-title">
+          <i class="fas fa-arrow-up" style="color: #ff4444;"></i>
+          Registro de Egresos
+        </h2>
+        <p class="egresos-subtitle">Administra y visualiza todo el dinero que sale de tus cuentas</p>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <a href="dashboard.php" class="btn-cancel">
+          <i class="fas fa-arrow-left mr-2"></i> Volver
+        </a>
+        <button class="btn-nuevo-egreso" data-toggle="modal" data-target="#modalNuevoEgreso">
+          <i class="fas fa-plus"></i> Registrar Egreso
+        </button>
+      </div>
+    </div>
+
+    <!-- Resumen -->
+    <div class="resumen-grid">
+      <div class="resumen-card">
+        <div class="resumen-icon"><i class="fas fa-calendar-check"></i></div>
+        <p class="resumen-label">Egresos del Mes</p>
+        <p class="resumen-valor">$9,850.00</p>
+      </div>
+      <div class="resumen-card">
+        <div class="resumen-icon"><i class="fas fa-chart-line"></i></div>
+        <p class="resumen-label">Promedio por Egreso</p>
+        <p class="resumen-valor">$3,283.33</p>
+      </div>
+      <div class="resumen-card">
+        <div class="resumen-icon"><i class="fas fa-wallet"></i></div>
+        <p class="resumen-label">Total Acumulado (Año)</p>
+        <p class="resumen-valor">$68,400.00</p>
+      </div>
+    </div>
+
+    <!-- Tabla (READ) -->
+    <div class="tabla-egresos">
+      <div class="tabla-header">
+        <h3 class="tabla-titulo">Historial de Salidas</h3>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th class="text-right">Monto</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Egreso 1 -->
+            <tr>
+              <td>09/07/2026</td>
+              <td><span class="categoria-badge"><i class="fas fa-home"></i> Renta</span></td>
+              <td style="color:#ccc;">Pago mensual de renta del departamento</td>
+              <td class="text-right monto-egreso">-$5,500.00</td>
+              <td>
+                <div class="acciones-cell justify-content-end">
+                  <button class="btn-action edit" data-toggle="modal" data-target="#modalEditarEgreso" title="Editar"><i class="fas fa-edit"></i></button>
+                  <button class="btn-action delete" data-toggle="modal" data-target="#modalEliminarEgreso" title="Eliminar"><i class="fas fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Egreso 2 -->
+            <tr>
+              <td>06/07/2026</td>
+              <td><span class="categoria-badge"><i class="fas fa-utensils"></i> Alimentación</span></td>
+              <td style="color:#ccc;">Compra semanal en supermercado</td>
+              <td class="text-right monto-egreso">-$2,150.00</td>
+              <td>
+                <div class="acciones-cell justify-content-end">
+                  <button class="btn-action edit" data-toggle="modal" data-target="#modalEditarEgreso" title="Editar"><i class="fas fa-edit"></i></button>
+                  <button class="btn-action delete" data-toggle="modal" data-target="#modalEliminarEgreso" title="Eliminar"><i class="fas fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Egreso 3 -->
+            <tr>
+              <td>03/07/2026</td>
+              <td><span class="categoria-badge"><i class="fas fa-gas-pump"></i> Transporte</span></td>
+              <td style="color:#ccc;">Gasolina y mantenimiento del auto</td>
+              <td class="text-right monto-egreso">-$2,200.00</td>
+              <td>
+                <div class="acciones-cell justify-content-end">
+                  <button class="btn-action edit" data-toggle="modal" data-target="#modalEditarEgreso" title="Editar"><i class="fas fa-edit"></i></button>
+                  <button class="btn-action delete" data-toggle="modal" data-target="#modalEliminarEgreso" title="Eliminar"><i class="fas fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: CREAR (CREATE) -->
+  <!-- ================================================================= -->
+  <div class="modal fade" id="modalNuevoEgreso" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-plus-circle" style="color: #ff4444;"></i> Registrar Nuevo Egreso</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label-custom">Fecha</label>
+                  <input type="date" class="form-input-custom" value="2026-07-17" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label-custom">Monto ($)</label>
+                  <input type="number" class="form-input-custom" placeholder="0.00" min="0" step="0.01" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label-custom">Categoría</label>
+              <select class="form-select-custom" required>
+                <option value="">Selecciona una categoría...</option>
+                <option value="renta">🏠 Renta / Hipoteca</option>
+                <option value="alimentacion">🍽️ Alimentación</option>
+                <option value="transporte">⛽ Transporte</option>
+                <option value="servicios">💡 Servicios (luz, agua, internet)</option>
+                <option value="entretenimiento">🎬 Entretenimiento</option>
+                <option value="otros">📦 Otros gastos</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label-custom">Descripción (Opcional)</label>
+              <input type="text" class="form-input-custom" placeholder="Ej: Pago de renta, Compra de despensa...">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn-submit-red" onclick="alert('¡Simulación: Egreso registrado con éxito!'); $('#modalNuevoEgreso').modal('hide');">
+            <i class="fas fa-save mr-2"></i> Guardar Egreso
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: EDITAR (UPDATE) -->
+  <!-- ================================================================= -->
+  <div class="modal fade" id="modalEditarEgreso" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-edit" style="color: #f4a820;"></i> Editar Egreso</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert py-2 mb-3" role="alert" style="background:rgba(244,168,32,0.1); border:1px solid rgba(244,168,32,0.3); color:#f4a820; font-size:0.85rem;">
+            <i class="fas fa-info-circle"></i> Vista de simulación: Los datos ya se encuentran pre-cargados.
+          </div>
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label-custom">Fecha</label>
+                  <input type="date" class="form-input-custom" value="2026-07-06" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label-custom">Monto ($)</label>
+                  <input type="number" class="form-input-custom" value="2150.00" min="0" step="0.01" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label-custom">Categoría</label>
+              <select class="form-select-custom" required>
+                <option value="alimentacion" selected>🍽️ Alimentación</option>
+                <option value="renta">🏠 Renta / Hipoteca</option>
+                <option value="transporte">⛽ Transporte</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label-custom">Descripción</label>
+              <input type="text" class="form-input-custom" value="Compra semanal en supermercado" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn-submit-red" onclick="alert('¡Simulación: Egreso actualizado!'); $('#modalEditarEgreso').modal('hide');">
+            <i class="fas fa-save mr-2"></i> Actualizar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: ELIMINAR (DELETE) -->
+  <!-- ================================================================= -->
+  <div class="modal fade" id="modalEliminarEgreso" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background: rgba(255, 68, 68, 0.1);">
+          <h5 class="modal-title"><i class="fas fa-exclamation-triangle" style="color: #ff4444;"></i> ¿Confirmar eliminación?</h5>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <p style="color: #fff; margin-bottom: 0.5rem;">¿Estás seguro de que deseas eliminar este egreso?</p>
+          <p style="color: #888; font-size: 0.9rem; margin-bottom: 0;">
+            <strong style="color: #ff4444;">Advertencia:</strong> Esta acción no se puede deshacer. El monto se restará de tu balance total de egresos.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn-delete-confirm" onclick="alert('¡Simulación: Egreso eliminado!'); $('#modalEliminarEgreso').modal('hide');">
+            <i class="fas fa-trash mr-2"></i> Sí, Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
